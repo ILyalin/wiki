@@ -17,7 +17,9 @@ def getwiki(word: str):
     wikipedia.set_lang("ru")
     try:
         p_wiki = wikipedia.page(word)
-        return f'<b>{p_wiki.title}</b>' + p_wiki.summary[len(p_wiki.title) + 1:]
+        p_wiki_summary = p_wiki.summary
+        p_wiki_title = p_wiki_summary.split('—')
+        return f'<b>{str(p_wiki_title[0])}</b>' + '—' + str(''.join(p_wiki_title[1:]))
     except wikipedia.exceptions.PageError:
         return f'<i>Такого слова нет в словаре Википедии!</i>'
 
